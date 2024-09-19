@@ -39,7 +39,7 @@ export default function Home() {
   ];
 
   return (
-    <Layout>
+    <Layout showNavigation={false}>
       <div className="max-w-7xl mx-auto px-4 py-12 flex flex-col min-h-screen">
         <motion.h1 
           className="text-4xl md:text-5xl font-handwriting font-bold mb-12 text-center"
@@ -72,14 +72,14 @@ export default function Home() {
           >
             <div className="flex-grow">
               <h2 className="text-2xl font-handwriting font-semibold mb-4 flex items-center">
-                <FontAwesomeIcon icon={faUser} className="mr-3 w-6 h-6" />
+                <FontAwesomeIcon icon={faUser} className="mr-3 w-5 h-5" />
                 关于我
               </h2>
               <p className="text-lg mb-6 leading-relaxed font-handwriting">
                 普通的人，不务正业的学生。成绩不好，脑子不好用，偶尔翻唱，写写代码。
               </p>
               <h2 className="text-2xl font-handwriting font-semibold mb-4 flex items-center mt-8">
-                <FontAwesomeIcon icon={faBlog} className="mr-3 w-6 h-6" />
+                <FontAwesomeIcon icon={faBlog} className="mr-3 w-5 h-5" />
                 我的博客
               </h2>
               <p className="text-lg mb-6 leading-relaxed font-handwriting">
@@ -92,7 +92,7 @@ export default function Home() {
               href="/blog"
               className="flex items-center justify-center px-6 py-3 bg-amber-100 dark:bg-gray-700 hover:bg-amber-200 dark:hover:bg-gray-600 transition-colors font-handwriting rounded-lg text-lg mt-auto"
             >
-              <FontAwesomeIcon icon={faBlog} className="mr-3 w-6 h-6" />
+              <FontAwesomeIcon icon={faBlog} className="mr-3 w-5 h-5" />
               <span>访问我的博客</span>
             </motion.a>
           </motion.div>
@@ -106,7 +106,7 @@ export default function Home() {
           >
             <div className="flex-grow">
               <h2 className="text-2xl font-handwriting font-semibold mb-4 flex items-center">
-                <FontAwesomeIcon icon={faProjectDiagram} className="mr-3 w-6 h-6" />
+                <FontAwesomeIcon icon={faProjectDiagram} className="mr-3 w-5 h-5" />
                 我的链接
               </h2>
               <ul className="space-y-4 mb-8">
@@ -117,7 +117,7 @@ export default function Home() {
                 ].map((link, index) => (
                   <motion.li key={index} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <a href={link.href} className="flex items-center px-4 py-2 hover:bg-amber-100 dark:hover:bg-gray-700 transition-colors font-handwriting rounded-lg">
-                      <FontAwesomeIcon icon={link.icon} className="mr-3 w-6 h-6" />
+                      <FontAwesomeIcon icon={link.icon} className="mr-3 w-5 h-5" />
                       <span className="text-lg">{link.text}</span>
                     </a>
                   </motion.li>
@@ -136,7 +136,7 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsContactOpen(!isContactOpen)}
               >
-                <FontAwesomeIcon icon={isContactOpen ? faChevronUp : faChevronDown} className="mr-3 w-6 h-6" />
+                <FontAwesomeIcon icon={isContactOpen ? faChevronUp : faChevronDown} className="mr-3 w-5 h-5" />
                 <span>联系方式</span>
               </motion.button>
               <AnimatePresence>
@@ -157,7 +157,7 @@ export default function Home() {
                         className="py-2 hover:bg-amber-100 dark:hover:bg-gray-700 transition-colors"
                       >
                         <div className="flex items-center font-handwriting px-4">
-                          <FontAwesomeIcon icon={item.icon} className="mr-3 w-6 h-6" />
+                          <FontAwesomeIcon icon={item.icon} className="mr-3 w-5 h-5" />
                           <span className="text-lg">{item.text}: {item.info}</span>
                         </div>
                       </motion.li>
@@ -191,7 +191,7 @@ export default function Home() {
                 transition={{ duration: 0.3 }}
                 className="bg-amber-50 dark:bg-gray-800 rounded-lg border border-amber-200 dark:border-gray-600 p-4"
               >
-                <Valine />
+                <Valine path="/" />
               </motion.div>
             )}
           </AnimatePresence>

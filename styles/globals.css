@@ -5,14 +5,17 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-amber-50 text-amber-900 dark:bg-gray-900 dark:text-amber-50;
+@layer base {
+  body {
+    @apply bg-background-light text-text-light dark:bg-background-dark dark:text-text-dark;
+  }
+
+  a {
+    @apply text-primary-dark dark:text-primary-light hover:text-primary dark:hover:text-primary transition-colors;
+  }
 }
 
-a {
-  @apply text-amber-800 dark:text-amber-100 hover:text-amber-600 dark:hover:text-amber-300 transition-colors;
-}
-
+/* 添加背景线条 */
 .bg-lined {
   background-image: 
     linear-gradient(to right, rgba(185, 128, 62, 0.1) 1px, transparent 1px),
@@ -26,80 +29,183 @@ a {
     linear-gradient(to bottom, rgba(254, 243, 199, 0.1) 1px, transparent 1px);
 }
 
-/* 自定义滚动条样式 */
-::-webkit-scrollbar {
-  width: 12px;
+/* Markdown 样式 */
+.prose {
+  @apply text-text-light dark:text-text-dark;
 }
 
-::-webkit-scrollbar-track {
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  @apply text-primary-dark dark:text-primary-light font-handwriting;
+}
+
+.prose a {
+  @apply text-primary-dark dark:text-primary-light hover:text-primary dark:hover:text-primary transition-colors;
+}
+
+.prose strong {
+  @apply text-primary-dark dark:text-primary-light;
+}
+
+.prose ul, .prose ol {
+  @apply my-4 pl-6;
+}
+
+.prose li {
+  @apply mb-2;
+}
+
+/* 代码块样式 */
+pre[class*="language-"] {
+  @apply bg-amber-50 dark:bg-gray-800 rounded-lg p-4 my-4 overflow-x-auto;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  @apply text-amber-900 dark:text-amber-100;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-gray-600 dark:text-gray-400;
+}
+
+.token.punctuation {
+  @apply text-amber-800 dark:text-amber-200;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  @apply text-amber-700 dark:text-amber-300;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  @apply text-emerald-700 dark:text-emerald-300;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  @apply text-amber-600 dark:text-amber-400;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  @apply text-amber-800 dark:text-amber-200;
+}
+
+.token.function,
+.token.class-name {
+  @apply text-amber-900 dark:text-amber-100;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  @apply text-amber-700 dark:text-amber-300;
+}
+
+/* 行号样式 */
+.line-numbers .line-numbers-rows {
+  @apply border-r border-amber-300 dark:border-gray-600;
+}
+
+.line-numbers-rows > span:before {
+  @apply text-amber-500 dark:text-gray-500;
+}
+
+/* 内联代码样式 */
+:not(pre) > code {
+  @apply bg-amber-100 dark:bg-gray-700 px-1 py-0.5 rounded text-amber-900 dark:text-amber-100;
+}
+
+/* 引用样式 */
+blockquote p {
+  @apply inline;
+}
+
+/* 表格样式 */
+.prose table {
+  @apply w-full my-6 border-collapse;
+}
+
+.prose thead {
+  @apply bg-amber-100 dark:bg-gray-700;
+}
+
+.prose th {
+  @apply px-4 py-2 text-left font-bold text-amber-900 dark:text-amber-100 border-b-2 border-amber-200 dark:border-gray-600;
+}
+
+.prose td {
+  @apply px-4 py-2 border-b border-amber-200 dark:border-gray-700;
+}
+
+.prose tr:hover {
+  @apply bg-amber-200 dark:bg-gray-600 transition-colors duration-200;
+}
+
+/* 水平线样式 */
+.prose hr {
+  @apply border-amber-200 dark:border-gray-700;
+}
+
+/* 脚注样式 */
+.footnotes {
+  @apply mt-8 pt-4 border-t border-amber-200 dark:border-amber-800;
+}
+
+.footnotes ol {
+  @apply list-decimal list-inside;
+}
+
+.footnotes li {
+  @apply mb-2;
+}
+
+/* 代码块滚动条样式 */
+.prose pre::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.prose pre::-webkit-scrollbar-track {
   background: rgba(185, 128, 62, 0.1);
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb {
+.prose pre::-webkit-scrollbar-thumb {
   background: rgba(185, 128, 62, 0.5);
-  border-radius: 10px;
-  border: 3px solid rgba(185, 128, 62, 0.1);
+  border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+.prose pre::-webkit-scrollbar-thumb:hover {
   background: rgba(185, 128, 62, 0.7);
 }
 
-.dark ::-webkit-scrollbar-track {
+/* 适配深色模式 */
+.dark .prose pre::-webkit-scrollbar-track {
   background: rgba(254, 243, 199, 0.1);
 }
 
-.dark ::-webkit-scrollbar-thumb {
+.dark .prose pre::-webkit-scrollbar-thumb {
   background: rgba(254, 243, 199, 0.5);
-  border: 3px solid rgba(254, 243, 199, 0.1);
 }
 
-.dark ::-webkit-scrollbar-thumb:hover {
+.dark .prose pre::-webkit-scrollbar-thumb:hover {
   background: rgba(254, 243, 199, 0.7);
-}
-
-/* Valine 相关样式 */
-.valine-container {
-  font-family: 'Caveat', cursive; /* 更改为手写体 */
-}
-
-.valine-container .vwrap {
-  border-radius: 0.5rem;
-  border-color: rgba(185, 128, 62, 0.2);
-}
-
-.valine-container .vbtn {
-  background-color: #f59e0b;
-  color: white;
-  border: none;
-  border-radius: 0.25rem;
-  transition: background-color 0.3s;
-}
-
-.valine-container .vbtn:hover {
-  background-color: #d97706;
-}
-
-.valine-container .vcards .vcard {
-  border-radius: 0.5rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  background-color: rgba(254, 243, 199, 0.1);
-}
-
-.dark .valine-container .vcards .vcard {
-  background-color: rgba(55, 65, 81, 0.5);
-}
-
-.valine-container .vcards .vcard .vhead {
-  border-bottom: 1px solid rgba(185, 128, 62, 0.2);
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.valine-container .vcards .vcard .vquote {
-  border-left: 3px solid #f59e0b;
-  padding-left: 1rem;
-  margin-top: 0.5rem;
 }
