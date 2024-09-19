@@ -10,6 +10,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeHighlight from 'rehype-highlight';
+import Image from 'next/image';
 
 interface BlogPostProps {
   frontmatter: {
@@ -50,14 +51,14 @@ export default function BlogPost({ frontmatter, content }: BlogPostProps) {
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw, rehypeSanitize, rehypeHighlight]}
               components={{
-                h1: ({node, ...props}) => <h1 className="text-2xl font-bold mt-8 mb-4 text-amber-800 dark:text-amber-200" {...props} />,
-                h2: ({node, ...props}) => <h2 className="text-xl font-bold mt-6 mb-3 text-amber-700 dark:text-amber-300" {...props} />,
-                h3: ({node, ...props}) => <h3 className="text-lg font-bold mt-4 mb-2 text-amber-600 dark:text-amber-400" {...props} />,
-                p: ({node, ...props}) => <p className="my-4 leading-relaxed" {...props} />,
-                ul: ({node, ...props}) => <ul className="list-disc list-outside my-4 pl-6" {...props} />,
-                ol: ({node, ...props}) => <ol className="list-decimal list-outside my-4 pl-6" {...props} />,
-                li: ({node, ...props}) => <li className="mb-2" {...props} />,
-                blockquote: ({node, ...props}) => (
+                h1: ({node: _, ...props}) => <h1 className="text-2xl font-bold mt-8 mb-4 text-amber-800 dark:text-amber-200" {...props} />,
+                h2: ({node: _, ...props}) => <h2 className="text-xl font-bold mt-6 mb-3 text-amber-700 dark:text-amber-300" {...props} />,
+                h3: ({...props}) => <h3 className="text-lg font-bold mt-4 mb-2 text-amber-600 dark:text-amber-400" {...props} />,
+                p: ({...props}) => <p className="my-4 leading-relaxed" {...props} />,
+                ul: ({...props}) => <ul className="list-disc list-outside my-4 pl-6" {...props} />,
+                ol: ({...props}) => <ol className="list-decimal list-outside my-4 pl-6" {...props} />,
+                li: ({...props}) => <li className="mb-2" {...props} />,
+                blockquote: ({...props}) => (
                   <blockquote className="border-l-4 border-amber-500 pl-4 italic my-4 text-amber-700 dark:text-amber-300" {...props} />
                 ),
                 code: ({node, className, children, ...props}) => {
@@ -74,7 +75,17 @@ export default function BlogPost({ frontmatter, content }: BlogPostProps) {
                     </code>
                   );
                 },
-                img: ({node, ...props}) => <img className="mx-auto my-6 rounded-lg shadow-md" {...props} />,
+                img: ({src, alt, ...props}) => (
+                  <div className="relative w-full h-64 my-6">
+                    <Image
+                      src={src as string}
+                      alt={alt as string}
+                      layout="fill"
+                      objectFit="contain"
+                      className="rounded-lg shadow-md"
+                    />
+                  </div>
+                ),
                 a: ({node, ...props}) => <a className="text-amber-600 hover:text-amber-800 dark:text-amber-400 dark:hover:text-amber-200 underline" {...props} />,
               }}
             >
